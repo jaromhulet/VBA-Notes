@@ -4,6 +4,9 @@ Notes of Common VBA Code I Commonly Use
 # set variable as number of worksheets in workbook
 wrksheet_num = ThisWorkbook.Sheets.Count
 
+# Set variable equal to the row number of the last row (the last non-null cell)
+LastRow = Cells.Find(What:="*", After:=Range("A1"), SearchOrder:=xlByRows, SearchDirection:=xlPrevious, MatchCase:=False).Row
+
 # set varaible equal to the number of adjacent cells in column 1
 HomeLoop = Worksheets(1).Cells(Rows.Count, 1).End(xlUp).Row
 
@@ -114,4 +117,16 @@ Private Sub Worksheet_Deactivate()
        End If
 End Sub
 
+# Delete and shift up
+Selection.Delete Shift:=xlUp
 
+# Call macro when cell is changed (A1 in this case)
+Private Sub Worksheet_Change(ByVal Target As Range)
+
+If Target.Address = "$A$1" Then
+
+Call called_macro
+
+End If
+
+End Sub
